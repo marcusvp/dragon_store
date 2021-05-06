@@ -3,6 +3,7 @@ import thunk from "redux-thunk";
 import {
   adminItemListReducer,
   adminOrderListReducer,
+  adminSaleListReducer,
   adminUserListReducer,
 } from "./reducers/adminReducers";
 import { cartReducer } from "./reducers/cartReducers";
@@ -49,6 +50,7 @@ const reducer = combineReducers({
   adminItemList: adminItemListReducer,
   adminOrderList: adminOrderListReducer,
   adminUserList: adminUserListReducer,
+  adminSaleList: adminSaleListReducer,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

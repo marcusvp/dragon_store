@@ -34,7 +34,14 @@ export default function AdminScreen(props) {
           </button>
         </li>
         <li>
-          <button type="button">sales</button>
+          <button
+            type="button"
+            onClick={() => {
+              props.history.push(`/admin/sales`);
+            }}
+          >
+            sales
+          </button>
         </li>
       </ul>
     </div>

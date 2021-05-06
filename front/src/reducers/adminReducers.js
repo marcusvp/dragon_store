@@ -8,6 +8,9 @@ import {
   USER_LIST_REQUEST,
   USER_LIST_SUCCESS,
   USER_LIST_FAIL,
+  SALE_LIST_REQUEST,
+  SALE_LIST_SUCCESS,
+  SALE_LIST_FAIL,
 } from "../constants/adminConstants";
 
 export const adminItemListReducer = (state = { loading: true }, action) => {
@@ -43,6 +46,19 @@ export const adminUserListReducer = (state = { loading: true }, action) => {
     case USER_LIST_SUCCESS:
       return { loading: false, users: action.payload };
     case USER_LIST_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const adminSaleListReducer = (state = { loading: true }, action) => {
+  switch (action.type) {
+    case SALE_LIST_REQUEST:
+      return { loading: true };
+    case SALE_LIST_SUCCESS:
+      return { loading: false, sales: action.payload };
+    case SALE_LIST_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

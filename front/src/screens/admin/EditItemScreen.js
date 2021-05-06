@@ -8,7 +8,7 @@ export default function EditItemScreen(props) {
   const itemId = props.match.params.id;
 
   const itemDetails = useSelector((state) => state.itemDetails);
-  const { loading, error, item } = itemDetails;
+  const { item } = itemDetails;
 
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
@@ -123,12 +123,12 @@ export default function EditItemScreen(props) {
             value={stock}
             onChange={(e) => setStock(e.target.value)}
           ></input>
-          <div>
-            <label />
-            <button className="primary" type="submit">
-              update
-            </button>
-          </div>
+        </div>
+        <div>
+          <label />
+          <button className="primary" type="submit">
+            update
+          </button>
         </div>
       </form>
     </div>

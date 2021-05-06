@@ -6,6 +6,9 @@ import {
   ORDER_LIST_ADMIN_FAIL,
   ORDER_LIST_ADMIN_REQUEST,
   ORDER_LIST_ADMIN_SUCCESS,
+  SALE_LIST_FAIL,
+  SALE_LIST_REQUEST,
+  SALE_LIST_SUCCESS,
 } from "../constants/adminConstants";
 import {
   USER_LIST_FAIL,
@@ -68,6 +71,27 @@ export const getUsersAdmin = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getSalesAdmin = () => async (dispatch, getState) => {
+  dispatch({ type: SALE_LIST_REQUEST });
+  try {
+    const {
+      userSignin: { userInfo },
+    } = getState();
+    const { data } = await axios.get("/api/sales", {
+      headers: { Authorization: `Bearer ${userInfo.token}` },
+    });
+    dispatch({ type: SALE_LIST_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: SALE_LIST_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

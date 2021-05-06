@@ -17,4 +17,7 @@ module.exports = function (app) {
 
   //Get all orders
   app.get("/api/orders/admin", isAuth, isAdmin, order.getOrders);
+
+  //Get all sales
+  app.get("/api/sales", isAuth, isAdmin, order.getSales);
 };

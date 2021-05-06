@@ -22,6 +22,7 @@ import RegisterScreen from "./screens/RegisterScreen";
 import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import SigninScreen from "./screens/SigninScreen";
 import UploadItemScreen from "./screens/UploadItemScreen";
+import SalesListScreen from "./screens/admin/SalesListScreen";
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -111,6 +112,10 @@ function App() {
           <AdminRoute
             path="/admin/users"
             component={UserListScreen}
+          ></AdminRoute>
+          <AdminRoute
+            path="/admin/sales"
+            component={SalesListScreen}
           ></AdminRoute>
         </div>
         <footer className="row center">™</footer>

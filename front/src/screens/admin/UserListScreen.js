@@ -39,8 +39,9 @@ export default function UserList() {
                   <td>{user.name}</td>
                   <td>
                     {" "}
-                    {user.address.address}, {user.address.city},{" "}
-                    {user.address.postalCode}
+                    {user.address ? user.address.address : "n/a"},{" "}
+                    {user.address ? user.address.city : "n/a"},{" "}
+                    {user.address ? user.address.postalCode : "n/a"}
                   </td>
                   <td>{user.createdAt.substring(0, 10)}</td>
                   <td>{user.isAdmin ? "admin" : "user"}</td>

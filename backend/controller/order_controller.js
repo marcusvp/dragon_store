@@ -136,3 +136,13 @@ exports.getOrders = (req, res) => {
       res.status(500).json(error);
     });
 };
+
+exports.getSales = (req, res) => {
+  PaymentResult.findAll({ where: { status: "COMPLETED" } }).then((sales) => {
+    if (sales) {
+      res.status(200).send(sales);
+    } else {
+      res.send(404).send({ message: "sales not found" });
+    }
+  });
+};
