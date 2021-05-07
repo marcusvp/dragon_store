@@ -24,9 +24,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .env
-front/public/images/kirby.jpg
-front/public/images/mario.jpg
-front/public/images/zelda.jpg
+front/public/*
 backend/config/env.js
 backend/data.js
 .eslintrc.js
@@ -34,3 +32,4 @@ front/.eslintcache
 .eslintrc.js
 .eslintrc.js
 front/.eslintcache
+backend/resources/*

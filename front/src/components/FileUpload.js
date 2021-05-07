@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import UploadService from "../services/file_upload_service";
+import MessageBox from "./MessageBox";
 
 export default function FileUpload() {
   const [selectedFiles, setSelectedFiles] = useState(undefined);
@@ -43,49 +44,28 @@ export default function FileUpload() {
   };
 
   return (
-    <div>
-      {currentFile && (
-        <div className="progress">
-          <div
-            className="progress-bar progress-bar-info progress-bar-striped"
-            role="progressbar"
-            aria-valuenow={progress}
-            aria-valuemin="0"
-            aria-valuemax="100"
-            style={{ width: progress + "%" }}
-          >
-            {progress}%
-          </div>
-        </div>
-      )}
+    <div className="upload">
+      <div>
+        <label className="button">
+          <input type="file" onChange={selectFile} />
+        </label>
 
-      <label className="btn btn-default">
-        <input type="file" onChange={selectFile} />
-      </label>
-
-      <button
-        className="btn btn-success"
-        disabled={!selectedFiles}
-        onClick={upload}
-      >
-        upload
-      </button>
-
-      <div className="alert alert-light" role="alert">
-        {message}
+        <button className="button" disabled={!selectedFiles} onClick={upload}>
+          upload
+        </button>
       </div>
 
-      <div className="card">
-        <div className="card-header">list of files</div>
-        <ul className="list-group list-group-flush">
-          {fileInfos &&
-            fileInfos.map((file, index) => (
-              <li className="list-group-item" key={index}>
-                <a href={file.url}>{file.name}</a>
-              </li>
-            ))}
-        </ul>
-      </div>
+      {message && <MessageBox>{message}</MessageBox>}
+
+      <ul>
+        <h1>list of files</h1>
+        {fileInfos &&
+          fileInfos.map((file, index) => (
+            <li key={index}>
+              <a href={file.url}>{file.name}</a>
+            </li>
+          ))}
+      </ul>
     </div>
   );
 }
