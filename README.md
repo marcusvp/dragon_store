@@ -6,7 +6,7 @@ Aplicação de E-Commerce com integração em MariaDB e Paypal.
 - Docker instalado.  
 
 ## Setup  
-A partir do /dragon-store  
+A partir do /dragon_store  
 - `yarn install` para instalar as dependencias em /front e em /backend.  
 - `docker-compose up -d` para subir o docker container do MariaDB.  
 - `yarn start` para iniciar o backend e o frontend ao mesmo tempo.  
