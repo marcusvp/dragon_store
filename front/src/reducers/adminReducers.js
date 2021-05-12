@@ -11,6 +11,9 @@ import {
   SALE_LIST_REQUEST,
   SALE_LIST_SUCCESS,
   SALE_LIST_FAIL,
+  ADD_ITEM_REQUEST,
+  ADD_ITEM_SUCCESS,
+  ADD_ITEM_FAIL,
 } from "../constants/adminConstants";
 
 export const adminItemListReducer = (state = { loading: true }, action) => {
@@ -59,6 +62,19 @@ export const adminSaleListReducer = (state = { loading: true }, action) => {
     case SALE_LIST_SUCCESS:
       return { loading: false, sales: action.payload };
     case SALE_LIST_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const addItemReducer = (state = { loading: false }, action) => {
+  switch (action.type) {
+    case ADD_ITEM_REQUEST:
+      return { loading: true };
+    case ADD_ITEM_SUCCESS:
+      return { loading: false, item: action.payload };
+    case ADD_ITEM_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

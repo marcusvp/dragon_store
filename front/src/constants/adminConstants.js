@@ -15,3 +15,7 @@ export const SALE_LIST_SUCCESS = "SALE_LIST_SUCCESS";
 export const SALE_LIST_FAIL = "SALE_LIST_FAIL";
 
 export const LIST_RESET = "LIST_RESET";
+
+export const ADD_ITEM_REQUEST = "ADD_ITEM_REQUEST ";
+export const ADD_ITEM_SUCCESS = "ADD_ITEM_SUCCESS ";
+export const ADD_ITEM_FAIL = "ADD_ITEM_FAIL";

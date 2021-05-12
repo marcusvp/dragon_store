@@ -15,13 +15,13 @@ export default function ItemListScreen(props) {
   }, [dispatch]);
 
   return (
-    <div className="wrapper">
+    <div className="admin_area">
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <div>
+        <div className="">
           <h1>products</h1>
           <table className="table">
             <thead>
@@ -70,6 +70,14 @@ export default function ItemListScreen(props) {
           </table>
         </div>
       )}
+      <button
+        type="button"
+        onClick={() => {
+          props.history.push("/admin/add_item");
+        }}
+      >
+        add item
+      </button>
     </div>
   );
 }

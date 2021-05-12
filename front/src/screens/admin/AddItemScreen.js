@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { detailsItem, updateItem } from "../../actions/itemActions";
-import { ITEM_DETAILS_RESET } from "../../constants/itemConstants";
+import { addItemAdmin } from "../../actions/adminActions";
+import FileUpload from "../../components/FileUpload";
+import LoadingBox from "../../components/LoadingBox";
+import MessageBox from "../../components/MessageBox";
 
-export default function EditItemScreen(props) {
+export default function AddItemScreen() {
+  const adminAddItem = useSelector((state) => state.adminAddItem);
+  const { loading, error, item } = adminAddItem;
+
   const dispatch = useDispatch();
-  const itemId = props.match.params.id;
-
-  const itemDetails = useSelector((state) => state.itemDetails);
-  const { item } = itemDetails;
 
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
@@ -17,43 +18,26 @@ export default function EditItemScreen(props) {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
+  const [shouldUpload, setshouldUpload] = useState(false);
 
-  useEffect(() => {
-    if (!item || item.id !== itemId) {
-      dispatch({ type: ITEM_DETAILS_RESET });
-      dispatch(detailsItem(itemId));
-    } else {
-      setName(item.name);
-      setImage(item.image);
-      setCategory(item.category);
-      setBrand(item.brand);
-      setDescription(item.description);
-      setPrice(item.price);
-      setStock(item.countInStock);
-    }
-  }, [dispatch, item, itemId]);
-
-  const editItem = (e) => {
+  const submitItem = (e) => {
     e.preventDefault();
     dispatch(
-      updateItem(
-        itemId,
-        name,
-        image,
-        category,
-        brand,
-        description,
-        price,
-        stock
-      )
+      addItemAdmin(name, category, brand, description, price, stock, image)
     );
+    setshouldUpload(true);
   };
+
   return (
     <div className="admin_area">
-      <div className="col-1">
-        <form className="form" onSubmit={editItem}>
+      <div>
+        <div>
+          {loading && <LoadingBox></LoadingBox>}
+          {error && <MessageBox variant="danger">{error}</MessageBox>}
+        </div>
+        <form className="form" onSubmit={submitItem}>
           <div>
-            <h1>edit item</h1>
+            <h1>add item</h1>
           </div>
           <div>
             <label htmlFor="name">name</label>
@@ -116,19 +100,17 @@ export default function EditItemScreen(props) {
             ></input>
           </div>
           <div>
-            <label htmlFor="image">image</label>
-            <input
-              type="text"
-              id="image"
-              placeholder="enter image"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-            ></input>
+            <label htmlFor="image">image {image && `: ${image}`}</label>
+            <FileUpload
+              setImage={setImage}
+              setshouldUpload={setshouldUpload}
+              shouldUpload={shouldUpload}
+            ></FileUpload>
           </div>
           <div>
             <label />
             <button className="primary" type="submit">
-              update
+              add item
             </button>
           </div>
         </form>

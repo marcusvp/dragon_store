@@ -11,8 +11,8 @@ exports.create = (req, res) => {
     price: req.body.price,
     countInStock: req.body.countInStock,
     brand: req.body.brand,
-    rating: req.body.rating,
-    numReviews: req.body.numReviews,
+    rating: req.body.rating || 0,
+    numReviews: req.body.numReviews || 0,
     description: req.body.description,
   })
     .then((item) => {

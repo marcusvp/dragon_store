@@ -11,6 +11,7 @@ const upload = async (req, res) => {
     }
 
     res.status(200).send({
+      data: req.file.originalname,
       message: "Uploaded the file successfully: " + req.file.originalname,
     });
   } catch (err) {
@@ -30,14 +31,13 @@ const upload = async (req, res) => {
 
 const getListFiles = (req, res) => {
   // eslint-disable-next-line no-undef
-  const directoryPath = __basedir + "/resources/static/assets/uploads/";
+  const directoryPath = __basedir + "/../front/public/images/";
   fs.readdir(directoryPath, function (error, files) {
     if (error) {
       res.status(500).send({
         message: "unable to scan files",
       });
     }
-
     let fileInfos = [];
 
     files.forEach((file) => {
@@ -53,7 +53,7 @@ const getListFiles = (req, res) => {
 const download = (req, res) => {
   const fileName = req.params.name;
   // eslint-disable-next-line no-undef
-  const directoryPath = __basedir + "/resources/static/assets/uploads/";
+  const directoryPath = __basedir + "/../front/public/images/";
 
   res.download(directoryPath + fileName, fileName, (error) => {
     if (error) {

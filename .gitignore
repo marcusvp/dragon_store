@@ -24,12 +24,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .env
-front/public/*
+front/public/images/*
 backend/config/env.js
 backend/data.js
-.eslintrc.js
-front/.eslintcache
-.eslintrc.js
 .eslintrc.js
 front/.eslintcache
 backend/resources/*

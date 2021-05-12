@@ -1,46 +1,40 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import UploadService from "../services/file_upload_service";
 import MessageBox from "./MessageBox";
 
-export default function FileUpload() {
+export default function FileUpload(props) {
   const [selectedFiles, setSelectedFiles] = useState(undefined);
-  const [currentFile, setCurrentFile] = useState(undefined);
-  const [progress, setProgress] = useState(0);
   const [message, setMessage] = useState("");
-  const [fileInfos, setFileInfos] = useState([]);
+  const { setImage, shouldUpload } = props;
 
-  useEffect(() => {
-    UploadService.getFiles().then((response) => {
-      setFileInfos(response.data);
-    });
-  }, []);
-
-  const selectFile = (event) => {
-    setSelectedFiles(event.target.files);
-  };
-
-  const upload = () => {
+  const upload = useCallback(() => {
     let currentFile = selectedFiles[0];
 
-    setProgress(0);
-    setCurrentFile(currentFile);
-
-    UploadService.upload(currentFile, (event) => {
-      setProgress(Math.round((100 * event.loaded) / event.total));
-    })
+    UploadService.upload(currentFile, (event) => {})
       .then((response) => {
         setMessage(response.data.message);
+        setImage(response.data);
         return UploadService.getFiles();
       })
       .then((files) => {
-        setFileInfos(files.data);
+        console.log(files);
       })
       .catch(() => {
-        setProgress(0);
         setMessage("could not upload the file");
-        setCurrentFile(undefined);
       });
     setSelectedFiles(undefined);
+  });
+
+  useEffect(() => {
+    console.log(selectedFiles);
+    if (shouldUpload && selectedFiles) {
+      upload();
+    }
+  }, [selectedFiles, shouldUpload, upload]);
+
+  const selectFile = (event) => {
+    setSelectedFiles(event.target.files);
+    setImage(event.target.files[0].name);
   };
 
   return (
@@ -49,23 +43,8 @@ export default function FileUpload() {
         <label className="button">
           <input type="file" onChange={selectFile} />
         </label>
-
-        <button className="button" disabled={!selectedFiles} onClick={upload}>
-          upload
-        </button>
+        {message && <MessageBox>{message}</MessageBox>}
       </div>
-
-      {message && <MessageBox>{message}</MessageBox>}
-
-      <ul>
-        <h1>list of files</h1>
-        {fileInfos &&
-          fileInfos.map((file, index) => (
-            <li key={index}>
-              <a href={file.url}>{file.name}</a>
-            </li>
-          ))}
-      </ul>
     </div>
   );
 }

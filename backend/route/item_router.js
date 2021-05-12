@@ -3,7 +3,7 @@ module.exports = function (app) {
   const { isAuth, isAdmin } = require("../utils.js");
 
   // Create a new item
-  app.post("/api/items", items.create);
+  app.post("/api/items", isAuth, isAdmin, items.create);
 
   // Retrieve all items
   app.get("/api/items", items.findAll);

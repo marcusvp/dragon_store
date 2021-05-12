@@ -38,12 +38,10 @@ footer {
 }
 .client {
   position: sticky;
-  padding-left: 1rem;
-  padding-top: 1rem;
+  padding: 1rem;
 }
 .admin {
   grid-area: main;
-  min-height: 0;
   display: flex;
 }
 /* Common */
@@ -225,6 +223,10 @@ img.large {
 .form label {
   margin: 1rem 0;
 }
+/* Admin content area */
+.admin_area {
+  padding: 1rem;
+}
 /* Admin Side Navigation */
 .sidenav {
   background-color: #203040;
@@ -233,6 +235,7 @@ img.large {
   text-align: center;
   height: 100%;
   z-index: 2;
+  overflow: visible !important;
 }
 .sidenav ul {
   border-color: #203040;
@@ -284,6 +287,7 @@ img.large {
 .table {
   border-collapse: collapse;
   max-width: fit-content;
+  margin-bottom: 1rem;
 }
 .table tbody tr:nth-of-type(odd) {
   background-color: #f4f4f4;

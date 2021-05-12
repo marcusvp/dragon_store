@@ -14,7 +14,7 @@ export default function UserList() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className="admin_area">
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (

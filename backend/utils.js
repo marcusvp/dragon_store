@@ -8,7 +8,7 @@ exports.generateToken = (user) => {
       email: user.email,
       isAdmin: user.isAdmin,
     },
-    process.env.JWT_SECRET,
+    process.env.JWT_SECRET || "dev",
     { expiresIn: "30d" }
   );
 };
@@ -17,7 +17,7 @@ exports.isAuth = (req, res, next) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
   if (token) {
-    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    jwt.verify(token, process.env.JWT_SECRET || "dev", (err, user) => {
       if (err) {
         res.status(401).send({ message: "invalid token" });
       } else {

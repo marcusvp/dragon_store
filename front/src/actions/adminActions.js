@@ -1,5 +1,8 @@
 import axios from "axios";
 import {
+  ADD_ITEM_FAIL,
+  ADD_ITEM_REQUEST,
+  ADD_ITEM_SUCCESS,
   ITEM_LIST_ADMIN_FAIL,
   ITEM_LIST_ADMIN_REQUEST,
   ITEM_LIST_ADMIN_SUCCESS,
@@ -99,3 +102,38 @@ export const getSalesAdmin = () => async (dispatch, getState) => {
     });
   }
 };
+
+export const addItemAdmin =
+  (name, category, brand, description, price, stock, image) =>
+  async (dispatch, getState) => {
+    dispatch({ type: ADD_ITEM_REQUEST });
+    try {
+      const {
+        userSignin: { userInfo },
+      } = getState();
+      const { data } = await axios.post(
+        "/api/items",
+        {
+          name,
+          category,
+          brand,
+          description,
+          price,
+          countInStock: stock,
+          image,
+        },
+        {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
+        }
+      );
+      dispatch({ type: ADD_ITEM_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: ADD_ITEM_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };

@@ -23,6 +23,7 @@ import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import SigninScreen from "./screens/SigninScreen";
 import UploadItemScreen from "./screens/UploadItemScreen";
 import SalesListScreen from "./screens/admin/SalesListScreen";
+import AddItemScreen from "./screens/admin/AddItemScreen";
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -104,6 +105,10 @@ function App() {
           <AdminRoute
             path="/admin/item/:id"
             component={EditItemScreen}
+          ></AdminRoute>
+          <AdminRoute
+            path="/admin/add_item"
+            component={AddItemScreen}
           ></AdminRoute>
           <AdminRoute
             path="/admin/orders"

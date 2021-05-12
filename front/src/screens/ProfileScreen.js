@@ -37,7 +37,7 @@ export default function ProfileScreen() {
   };
 
   useEffect(() => {
-    if (!user || user.email !== userInfo.email) {
+    if (!user || user.email !== userInfo.email || user.name !== userInfo.name) {
       dispatch({ type: USER_EDIT_PROFILE_RESET });
       dispatch({ type: USER_DETAILS_RESET });
       dispatch(detailsUser(userInfo.id));

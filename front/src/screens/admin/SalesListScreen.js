@@ -14,7 +14,7 @@ export default function SalesListScreen(props) {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className="admin_area">
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
