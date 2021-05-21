@@ -11,6 +11,7 @@ import { ORDER_PAYMENT_RESET } from "../constants/orderConstants";
 export default function OrderScreen(props) {
   const orderId = props.match.params.id;
   const [sdkReady, setSdkReady] = useState(false);
+
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
   const orderPayment = useSelector((state) => state.orderPayment);
@@ -50,6 +51,7 @@ export default function OrderScreen(props) {
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(order, paymentResult));
   };
+
   return loading ? (
     <LoadingBox></LoadingBox>
   ) : error ? (

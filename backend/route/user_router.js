@@ -3,7 +3,7 @@ const { isAuth, isAdmin } = require("../utils.js");
 module.exports = function (app) {
   const users = require("../controller/user_controller.js");
 
-  // Create a new item
+  // Create a new user
   app.post("/api/users", users.create);
 
   // Retrieve all users
@@ -12,10 +12,10 @@ module.exports = function (app) {
   // Retrieve a single user by Id
   app.get("/api/users/:id", isAuth, users.findByPk);
 
-  // Update a item with Id
+  // Update a user with Id
   app.put("/api/users/:id", isAuth, users.update);
 
-  // Delete a item with Id
+  // Delete a user with Id
   app.delete("/api/users/:id", users.delete);
 
   // Login user

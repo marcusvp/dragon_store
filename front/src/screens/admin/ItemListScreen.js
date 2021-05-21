@@ -1,18 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getItemsAdmin } from "../../actions/adminActions";
+import { deleteItemAdmin, getItemsAdmin } from "../../actions/adminActions";
 import LoadingBox from "../../components/LoadingBox";
 import MessageBox from "../../components/MessageBox";
 
 export default function ItemListScreen(props) {
   const dispatch = useDispatch();
 
+  const [deletionSuccess, setDeletionSuccess] = useState(false);
+
   const adminItemList = useSelector((state) => state.adminItemList);
   const { items, loading, error } = adminItemList;
 
   useEffect(() => {
     dispatch(getItemsAdmin());
-  }, [dispatch]);
+    if (deletionSuccess) {
+      dispatch(getItemsAdmin());
+      setDeletionSuccess(false);
+    }
+  }, [deletionSuccess, dispatch]);
 
   return (
     <div className="admin_area">
@@ -62,6 +68,15 @@ export default function ItemListScreen(props) {
                       }}
                     >
                       edit
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        dispatch(deleteItemAdmin(item.id));
+                        setDeletionSuccess(true);
+                      }}
+                    >
+                      delete
                     </button>
                   </th>
                 </tr>

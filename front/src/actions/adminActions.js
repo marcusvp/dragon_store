@@ -9,6 +9,9 @@ import {
   ORDER_LIST_ADMIN_FAIL,
   ORDER_LIST_ADMIN_REQUEST,
   ORDER_LIST_ADMIN_SUCCESS,
+  REMOVE_ITEM_FAIL,
+  REMOVE_ITEM_REQUEST,
+  REMOVE_ITEM_SUCCESS,
   SALE_LIST_FAIL,
   SALE_LIST_REQUEST,
   SALE_LIST_SUCCESS,
@@ -137,3 +140,24 @@ export const addItemAdmin =
       });
     }
   };
+
+export const deleteItemAdmin = (id) => async (dispatch, getState) => {
+  dispatch({ type: REMOVE_ITEM_REQUEST });
+  try {
+    const {
+      userSignin: { userInfo },
+    } = getState();
+    await axios.delete(`/api/items/${id}`, {
+      headers: { Authorization: `Bearer ${userInfo.token}` },
+    });
+    dispatch({ type: REMOVE_ITEM_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: REMOVE_ITEM_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};

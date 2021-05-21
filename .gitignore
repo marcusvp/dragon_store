@@ -30,3 +30,6 @@ backend/data.js
 .eslintrc.js
 front/.eslintcache
 backend/resources/*
+dragonstore.code-workspace
+front/src/setupTests.js
+front/src/__tests__/*

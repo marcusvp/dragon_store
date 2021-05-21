@@ -5,7 +5,7 @@ import MessageBox from "./MessageBox";
 export default function FileUpload(props) {
   const [selectedFiles, setSelectedFiles] = useState(undefined);
   const [message, setMessage] = useState("");
-  const { setImage, shouldUpload } = props;
+  const { setImage, shouldUpload, setshouldUpload } = props;
 
   const upload = useCallback(() => {
     let currentFile = selectedFiles[0];
@@ -23,6 +23,7 @@ export default function FileUpload(props) {
         setMessage("could not upload the file");
       });
     setSelectedFiles(undefined);
+    setshouldUpload(false);
   });
 
   useEffect(() => {

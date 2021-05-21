@@ -7,7 +7,7 @@ import MessageBox from "../../components/MessageBox";
 
 export default function AddItemScreen() {
   const adminAddItem = useSelector((state) => state.adminAddItem);
-  const { loading, error, item } = adminAddItem;
+  const { loading, error } = adminAddItem;
 
   const dispatch = useDispatch();
 
