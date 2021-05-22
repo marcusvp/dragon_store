@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import UploadService from "../services/file_upload_service";
 import MessageBox from "./MessageBox";
 
@@ -7,31 +7,30 @@ export default function FileUpload(props) {
   const [message, setMessage] = useState("");
   const { setImage, shouldUpload, setshouldUpload } = props;
 
-  const upload = useCallback(() => {
-    let currentFile = selectedFiles[0];
-
-    UploadService.upload(currentFile, (event) => {})
-      .then((response) => {
-        setMessage(response.data.message);
-        setImage(response.data);
-        return UploadService.getFiles();
-      })
-      .then((files) => {
-        console.log(files);
-      })
-      .catch(() => {
-        setMessage("could not upload the file");
-      });
-    setSelectedFiles(undefined);
-    setshouldUpload(false);
-  });
-
   useEffect(() => {
+    const upload = () => {
+      let currentFile = selectedFiles[0];
+
+      UploadService.upload(currentFile, (event) => {})
+        .then((response) => {
+          setMessage(response.data.message);
+          setImage(response.data);
+          return UploadService.getFiles();
+        })
+        .then((files) => {
+          console.log(files);
+        })
+        .catch(() => {
+          setMessage("could not upload the file");
+        });
+      setSelectedFiles(undefined);
+      setshouldUpload(false);
+    };
     console.log(selectedFiles);
     if (shouldUpload && selectedFiles) {
       upload();
     }
-  }, [selectedFiles, shouldUpload, upload]);
+  }, [selectedFiles, setImage, setshouldUpload, shouldUpload]);
 
   const selectFile = (event) => {
     setSelectedFiles(event.target.files);
