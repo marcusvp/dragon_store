@@ -100,7 +100,14 @@ export default function AddItemScreen() {
             ></input>
           </div>
           <div>
-            <label htmlFor="image">image {image && `: ${image}`}</label>
+            <label htmlFor="image">image</label>
+            <input
+              type="text"
+              id="image"
+              placeholder="enter image url, or upload it"
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
+            ></input>
             <FileUpload
               setImage={setImage}
               setshouldUpload={setshouldUpload}
