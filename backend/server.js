@@ -8,11 +8,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 global.__basedir = __dirname;
-
-var corsOptions = {
-  origin: "http://localhost:3000",
-};
-app.use(cors(corsOptions));
+app.use(cors());
 
 const db = require("./config/db.js");
 

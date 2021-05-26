@@ -1,9 +1,10 @@
 module.exports = function (app) {
   const items = require("../controller/item_controller.js");
+
   const { isAuth, isAdmin } = require("../utils.js");
 
   // Create a new item
-  app.post("/api/items", isAuth, isAdmin, items.create);
+  app.post("/api/items", items.create);
 
   // Retrieve all items
   app.get("/api/items", items.findAll);
