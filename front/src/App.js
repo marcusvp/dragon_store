@@ -21,7 +21,6 @@ import ProfileScreen from "./screens/ProfileScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import SigninScreen from "./screens/SigninScreen";
-import UploadItemScreen from "./screens/UploadItemScreen";
 import SalesListScreen from "./screens/admin/SalesListScreen";
 import AddItemScreen from "./screens/admin/AddItemScreen";
 
@@ -89,7 +88,6 @@ function App() {
             <Route path="/placeorder" component={PlaceOrderScreen}></Route>
             <Route path="/order/:id" component={OrderScreen}></Route>
             <Route path="/orderhistory" component={OrderHistoryScreen}></Route>
-            <Route path="/upload_item" component={UploadItemScreen}></Route>
             <PrivateRoute
               path="/profile"
               component={ProfileScreen}
