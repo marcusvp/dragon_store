@@ -7,6 +7,9 @@ import {
   ITEM_LIST_FAIL,
   ITEM_LIST_REQUEST,
   ITEM_LIST_SUCCESS,
+  ITEM_SEARCH_FAIL,
+  ITEM_SEARCH_REQUEST,
+  ITEM_SEARCH_SUCCESS,
   ITEM_UPDATE_FAIL,
   ITEM_UPDATE_REQUEST,
   ITEM_UPDATE_SUCCESS,
@@ -40,42 +43,14 @@ export const detailsItem = (itemId) => async (dispatch) => {
   }
 };
 
-export const updateItem = (
-  itemId,
-  name,
-  image,
-  category,
-  brand,
-  description,
-  price,
-  stock
-) => async (dispatch, getState) => {
-  dispatch({ type: ITEM_UPDATE_REQUEST });
+export const searchItems = (query) => async (dispatch, getState) => {
+  dispatch({ type: ITEM_SEARCH_REQUEST, payload: query });
   try {
-    const {
-      userSignin: { userInfo },
-    } = getState();
-    await axios.put(
-      `/api/items/${itemId}`,
-      {
-        itemId,
-        name,
-        image,
-        category,
-        brand,
-        description,
-        price,
-        stock,
-      },
-      {
-        headers: { Authorization: `Bearer ${userInfo.token}` },
-      }
-    );
-    dispatch({ type: ITEM_DETAILS_RESET });
-    dispatch({ type: ITEM_UPDATE_SUCCESS });
+    const { data } = await axios.post(`/api/item/search`, { query: query });
+    dispatch({ type: ITEM_SEARCH_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
-      type: ITEM_UPDATE_FAIL,
+      type: ITEM_SEARCH_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
@@ -83,3 +58,40 @@ export const updateItem = (
     });
   }
 };
+
+export const updateItem =
+  (itemId, name, image, category, brand, description, price, stock) =>
+  async (dispatch, getState) => {
+    dispatch({ type: ITEM_UPDATE_REQUEST });
+    try {
+      const {
+        userSignin: { userInfo },
+      } = getState();
+      await axios.put(
+        `/api/items/${itemId}`,
+        {
+          itemId,
+          name,
+          image,
+          category,
+          brand,
+          description,
+          price,
+          stock,
+        },
+        {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
+        }
+      );
+      dispatch({ type: ITEM_DETAILS_RESET });
+      dispatch({ type: ITEM_UPDATE_SUCCESS });
+    } catch (error) {
+      dispatch({
+        type: ITEM_UPDATE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };

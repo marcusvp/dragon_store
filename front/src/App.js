@@ -23,6 +23,8 @@ import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import SigninScreen from "./screens/SigninScreen";
 import SalesListScreen from "./screens/admin/SalesListScreen";
 import AddItemScreen from "./screens/admin/AddItemScreen";
+import SearchBox from "./components/SearchBox";
+import SearchScreen from "./screens/SearchScreen";
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -42,6 +44,13 @@ function App() {
             <Link className="brand" to="/">
               dragon store
             </Link>
+          </div>
+          <div>
+            <Route
+              render={({ history }) => (
+                <SearchBox history={history}></SearchBox>
+              )}
+            ></Route>
           </div>
           <div>
             <Link to="/cart">cart</Link>
@@ -92,6 +101,7 @@ function App() {
               path="/profile"
               component={ProfileScreen}
             ></PrivateRoute>
+            <Route path="/search" component={SearchScreen}></Route>
           </div>
         </main>
         <div className="admin">

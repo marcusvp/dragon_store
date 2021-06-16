@@ -6,6 +6,10 @@ import {
   ITEM_LIST_FAIL,
   ITEM_LIST_REQUEST,
   ITEM_LIST_SUCCESS,
+  ITEM_SEARCH_FAIL,
+  ITEM_SEARCH_REQUEST,
+  ITEM_SEARCH_SUCCESS,
+  ITEM_SEARCH_RESET,
 } from "../constants/itemConstants";
 
 export const itemListReducer = (
@@ -33,6 +37,21 @@ export const itemDetailsReducer = (state = { loading: true }, action) => {
     case ITEM_DETAILS_FAIL:
       return { loading: false, error: action.payload };
     case ITEM_DETAILS_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const itemSearchReducer = (state = { loading: true }, action) => {
+  switch (action.type) {
+    case ITEM_SEARCH_REQUEST:
+      return { loading: true };
+    case ITEM_SEARCH_SUCCESS:
+      return { loading: false, items: action.payload };
+    case ITEM_SEARCH_FAIL:
+      return { loading: false, error: action.payload };
+    case ITEM_SEARCH_RESET:
       return {};
     default:
       return state;

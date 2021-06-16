@@ -135,8 +135,7 @@ a.brand {
   flex: 2 1 50rem;
 }
 .col-3 {
-  flex-basis: auto;
-  max-width: fit-content;
+  flex: 32 1 75rem;
 }
 .min-30 {
   min-width: 30rem;
@@ -313,4 +312,9 @@ img.large {
 }
 .upload > label {
   padding-right: 1rem;
+}
+
+/* Item Description */
+.description {
+  padding: 1rem;
 }

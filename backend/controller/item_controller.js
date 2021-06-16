@@ -1,4 +1,5 @@
 const db = require("../config/db.js");
+const { Op } = db.Sequelize;
 const Item = db.item;
 
 //Post item
@@ -36,7 +37,6 @@ exports.findAll = (req, res) => {
 //Find item by id
 exports.findByPk = (req, res) => {
   const id = req.params.id;
-
   Item.findByPk(id)
     .then((item) => {
       res.json(item);
@@ -84,11 +84,24 @@ exports.delete = (req, res) => {
           message: "item not found",
         });
       }
-
       return item
         .destroy()
         .then(() => res.status(200).json({ message: "deleted succesfully" }))
         .catch((error) => res.status(400).send(error));
     })
     .catch((error) => res.status(400).send(error));
+};
+
+exports.search = (req, res) => {
+  const searchQuery = req.body.query;
+  Item.findAll({
+    where: {
+      [Op.or]: [
+        { name: { [Op.like]: `%${searchQuery}%` } },
+        { description: { [Op.like]: `%${searchQuery}%` } },
+      ],
+    },
+  }).then((results) => {
+    res.send(results);
+  });
 };

@@ -9,12 +9,15 @@ module.exports = function (app) {
   // Retrieve all items
   app.get("/api/items", items.findAll);
 
-  // Retrieve a single item by Id
+  // Retrieve an single item by Id
   app.get("/api/items/:id", items.findByPk);
 
-  // Update a item with Id
+  // Update an item with Id
   app.put("/api/items/:id", isAuth, isAdmin, items.update);
 
-  // Delete a item with Id
+  // Delete an item with Id
   app.delete("/api/items/:id", isAuth, isAdmin, items.delete);
+
+  // Search an item
+  app.post("/api/item/search", items.search);
 };
