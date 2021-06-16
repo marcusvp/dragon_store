@@ -4,12 +4,12 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "front": "yarn --cwd ./front start",
+    "frontend": "yarn --cwd ./frontend start",
     "backend": "yarn --cwd ./backend start",
-    "start": "concurrently --kill-others-on-fail \"yarn front\" \"yarn backend\""
+    "start": "concurrently --kill-others-on-fail \"yarn frontend\" \"yarn backend\""
   },
   "workspaces": [
-    "front",
+    "frontend",
     "backend"
   ],
   "author": "",

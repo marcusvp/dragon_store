@@ -31,7 +31,7 @@ const upload = async (req, res) => {
 
 const getListFiles = (req, res) => {
   // eslint-disable-next-line no-undef
-  const directoryPath = __basedir + "/../front/public/images/";
+  const directoryPath = __basedir + "/../frontend/public/images/";
   fs.readdir(directoryPath, function (error, files) {
     if (error) {
       res.status(500).send({
@@ -53,7 +53,7 @@ const getListFiles = (req, res) => {
 const download = (req, res) => {
   const fileName = req.params.name;
   // eslint-disable-next-line no-undef
-  const directoryPath = __basedir + "/../front/public/images/";
+  const directoryPath = __basedir + "/../frontend/public/images/";
 
   res.download(directoryPath + fileName, fileName, (error) => {
     if (error) {
