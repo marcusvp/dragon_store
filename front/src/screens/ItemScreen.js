@@ -38,7 +38,7 @@ export default function ItemScreen(props) {
                 alt={item.name}
               ></img>
             </div>
-            <div className="col-1">
+            <div className="col-1 description">
               <ul>
                 <li>
                   <h1>{item.name}</h1>
