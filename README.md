@@ -2,6 +2,8 @@
 
 Aplicação de E-Commerce com integração em MariaDB e Paypal.
 
+link: https://dragonstore3.herokuapp.com/
+
 ## Requerimentos
 
 - NodeJS e Yarn instalados.
